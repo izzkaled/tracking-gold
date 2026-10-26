@@ -1,0 +1,84 @@
+<div class="page">
+  <!-- شريط علوي: اللغة + الثيم -->
+  <header class="topbar">
+    <p class="brand">{{ lang.t('brand') }}</p>
+
+    <div class="actions">
+      <button type="button" class="btn" (click)="lang.toggle()">
+        {{ lang.lang() === 'ar' ? 'English' : 'العربية' }}
+      </button>
+
+      <button type="button" class="btn" (click)="theme.toggle()">
+        {{ theme.theme() === 'light' ? lang.t('dark') : lang.t('light') }}
+      </button>
+    </div>
+  </header>
+
+  <!-- العنوان -->
+  <section class="hero">
+    <h1>{{ lang.t('title') }}</h1>
+    <p class="subtitle">{{ lang.t('subtitle') }}</p>
+  </section>
+
+  <!-- الفلتر -->
+  <section class="filters" aria-label="filters">
+    <p class="filter-label">{{ lang.t('filterLabel') }}</p>
+
+    <div class="filter-row">
+      <button
+        type="button"
+        class="chip"
+        [class.active]="isActive(null)"
+        (click)="setFilter(null)"
+      >
+        {{ lang.t('filterAll') }}
+      </button>
+
+      @for (k of karats; track k) {
+        <button
+          type="button"
+          class="chip"
+          [class.active]="isActive(k)"
+          (click)="setFilter(k)"
+        >
+          {{ k }}K
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- جدول الأسعار -->
+  <section class="prices">
+    @if (filteredPrices().length === 0) {
+      <p class="empty">{{ lang.t('empty') }}</p>
+    } @else {
+      <div class="table-head">
+        <span>{{ lang.t('karat') }}</span>
+        <span>{{ lang.t('price') }}</span>
+        <span>{{ lang.t('change') }}</span>
+      </div>
+
+      @for (item of filteredPrices(); track item.id) {
+        <article class="row">
+          <span class="karat">{{ item.karat }}K</span>
+          <span class="price">
+            {{ item.pricePerGram | number: '1.2-2' }}
+            <small>{{ lang.t('currency') }}</small>
+          </span>
+          <span
+            class="change"
+            [class.up]="item.changePercent >= 0"
+            [class.down]="item.changePercent < 0"
+          >
+            {{ item.changePercent >= 0 ? '+' : '' }}{{ item.changePercent | number: '1.2-2' }}%
+          </span>
+        </article>
+      }
+    }
+  </section>
+
+  <footer class="footer">
+    <p>{{ lang.t('updated') }}: {{ today | date: 'mediumDate' }}</p>
+    <p class="note">{{ lang.t('note') }}</p>
+  </footer>
+</div>

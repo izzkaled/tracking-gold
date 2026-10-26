@@ -1,0 +1,77 @@
+/* خطوط: عربي + إنجليزي */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Syne:wght@600;700&display=swap');
+
+:root {
+  --font-display: 'Syne', 'IBM Plex Sans Arabic', sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+
+  /* وضع فاتح */
+  --bg: #f7f5f0;
+  --bg-accent: radial-gradient(ellipse at 20% 0%, #efe6d4 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 10%, #e8efe8 0%, transparent 40%),
+    #f7f5f0;
+  --surface: #ffffff;
+  --surface-hover: #f3eee4;
+  --text: #1a1c18;
+  --muted: #5c6358;
+  --border: #d9d2c4;
+  --gold: #9a7200;
+  --on-gold: #fffdf6;
+  --up: #1f7a4c;
+  --down: #b42318;
+}
+
+/* وضع داكن */
+html[data-theme='dark'] {
+  --bg: #121410;
+  --bg-accent: radial-gradient(ellipse at 15% 0%, #2a2414 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 5%, #1a2420 0%, transparent 45%),
+    #121410;
+  --surface: #1c1f19;
+  --surface-hover: #262a22;
+  --text: #f2efe6;
+  --muted: #a8aea0;
+  --border: #33382e;
+  --gold: #d4a017;
+  --on-gold: #1a1400;
+  --up: #3dcf8a;
+  --down: #ff7b72;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: var(--bg-accent);
+  background-attachment: fixed;
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* حركة خفيفة عند تغيير الثيم */
+body,
+.page,
+.btn,
+.chip,
+.row {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
